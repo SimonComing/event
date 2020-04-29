@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest name="com.gowild.voiceserver.xera">
+
+    <!--
+                              ereActivityManifest.xml样例
+        **********************************需要注意**********************************
+        1、每个应用只有一个启动EreActivity，所以多个#gowild.intent.action.LAUNCH 是不被允许的
+        2、eraActivity标签对应的name值为EreActivity具体包名加类名，错误的类名不能被正确加载，重复类只会有最后一个生效
+        3、action标签对应的name值为此EreActivity的属性，推荐使用action来启动EreActivity，这样扩展性可以有保证；
+          action允许自定义，但是添加者有义务去确保action的唯一性；
+          一个EreActivity可以对应多个action
+        4、level标签代表着这个EreActivity的业务等级，高等级有更高的优先执行权，默认值为0
+        5、其他标签不允许存在，不会被解析
+    -->
+    <eraActivity name="cn.gowild.lifeline.activity.HOMEEreActivity">
+        <action name="gowild.intent.action.HOME"/>
+        <level>0</level>
+    </eraActivity>
+
+    <eraActivity name="cn.gowild.bluetooth.BlueToothEreActivity">
+        <action name="gowild.intent.action.BLUETOOTH"/>
+        <level>0</level>
+    </eraActivity>
+
+    <eraActivity name="com.gowild.EreActivity.LaunchEreActivity">
+        <action name="gowild.intent.action.LAUNCH"/>
+        <level>10</level>
+    </eraActivity>
+
+    <eraActivity name="com.gowild.EreActivity.SettingsEreActivity">
+        <action name="gowild.intent.action.SETTINGS"/>
+        <level>0</level>
+    </eraActivity>
+
+    <eraActivity name="cn.gowild.settings.wifi.NetConfigurationActivity">
+        <action name="gowild.intent.action.NETCONFIG"/>
+        <level>0</level>
+    </eraActivity>
+
+    <eraActivity name="cn.gowild.face.FaceServiceEreActivity">
+       <action name="gowild.intent.action.FACESERVICE"/>
+       <level>0</level>
+    </eraActivity>
+
+    <eraActivity name="cn.gowild.news.NewsEreActivity">
+        <action name="gowild.intent.action.NEWS"/>
+        <level>0</level>
+    </eraActivity>
+
+    <eraActivity name="cn.gowild.mediaplayer.MediaPlayerEraActivity">
+       <action name="gowild.intent.action.MEDIAPLAYER"/>
+       <level>0</level>
+    </eraActivity>
+
+    <eraActivity name="cn.gowild.skillshow.SkillEreactivity">
+        <action name="gowild.intent.action.SHOW"/>
+        <level>0</level>
+    </eraActivity>
+
+    <eraActivity name="cn.gowild.weather.WeatherEraActivity">
+       <action name="gowild.intent.action.WEATHER"/>
+       <level>0</level>
+    </eraActivity>
+
+    <eraActivity name="cn.gowild.alarm.AlarmEreActivity">
+        <action name="gowild.intent.action.ALARM"/>
+        <level>0</level>
+    </eraActivity>
+
+    <eraActivity name="cn.gowild.clothes.ChangeClothesEreActivity">
+        <action name="gowild.intent.action.CLOTHES"/>
+        <level>0</level>
+    </eraActivity>
+
+    <eraActivity name="cn.gowild.settings.volume.VolumeEreActivity">
+        <action name="gowild.intent.action.VOLUME"/>
+        <level>0</level>
+    </eraActivity>
+
+    <eraActivity name="cn.gowild.chat.ChatEreActivity">
+        <action name="gowild.intent.action.CHAT"/>
+        <level>0</level>
+    </eraActivity>
+
+    <eraActivity name="cn.gowild.idiom.IdiomEreActivity">
+        <action name="gowild.intent.action.IDIOM"/>
+        <level>0</level>
+    </eraActivity>
+
+    <eraActivity name="cn.gowild.update.UpdateEreActivity">
+        <action name="gowild.intent.action.UPDATE"/>
+        <level>0</level>
+    </eraActivity>
+
+    <eraActivity name="cn.gowild.settings.ShutdownEreActivity">
+         <action name="gowild.intent.action.SHUTDOWN"/>
+         <level>0</level>
+    </eraActivity>
+
+    <eraActivity name="cn.gowild.bedtime.BedTimeEreActivity">
+        <action name="gowild.intent.action.BEDTIME"/>
+        <level>0</level>
+    </eraActivity>
+
+    <eraActivity name="cn.gowild.motion.MotionEreActivity">
+        <action name="gowild.intent.action.MOTION"/>
+        <level>0</level>
+    </eraActivity>
+
+    <eraActivity name="cn.gowild.shop.ShopEreActivity">
+        <action name="gowild.intent.action.SHOP"/>
+        <level>0</level>
+    </eraActivity>
+
+    <eraActivity name="cn.gowild.skillshow.MealEreactivity">
+        <action name="gowild.intent.action.MEAL"/>
+        <level>0</level>
+    </eraActivity>
+
+    <eraActivity name="cn.gowild.skillshow.LearnEreactivity">
+        <action name="gowild.intent.action.LEARN"/>
+        <level>0</level>
+    </eraActivity>
+
+</manifest>

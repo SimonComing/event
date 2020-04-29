@@ -1,0 +1,29 @@
+ext {
+    // 用于编译的SDK版本
+    COMPILE_SDK_VERSION = 27
+
+    // 用于Gradle编译项目的工具版本
+    BUILD_TOOLS_VERSION = "27.0.3"
+
+    // 最低支持Android版本
+    MIN_SDK_VERSION = 21
+
+    // 目标版本
+    TARGET_SDK_VERSION = 22
+
+    // 设置是否使用混淆
+    MINIFY_ENABLED = true
+    MINIFY_DISABLED = false
+
+    // 应用程序包名
+    APPLICATION_ID = 'cn.gowild.voiceserver.xera'
+
+    // 升级组件是否可用，true值app module可以使用它，false升级组件将单独运行
+    COMPONENT_UPDATE_ENABLE = true
+    COMPONENT_FIXHANDLER_ENABLE = true
+    COMPONENT_RESPONSE_ENABLE = false
+    COMPONENT_GHOST_ENABLE = true
+    COMPONENT_SPEECH_ENABLE = true
+    COMPONENT_FACE_ENABLE = true
+    COMPONENT_UPNP_ENABLE = true
+}
