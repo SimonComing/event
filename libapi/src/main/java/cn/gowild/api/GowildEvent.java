@@ -1,14 +1,20 @@
 package cn.gowild.api;
 
+import android.content.Context;
+import android.content.pm.PackageManager;
 import android.text.TextUtils;
 import android.util.Log;
 
+import java.io.IOException;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by SimonSun on 2018/7/25.
@@ -18,9 +24,9 @@ public enum GowildEvent {
 
     INSTANCE;
 
-    private HashMap<String, ArrayList<MethodInfo>> mPathMap = new HashMap<>();
-    private HashMap<Class, ArrayList<MethodInfo>> mClassCache = new HashMap<>();
-    private ArrayList<StickyEvent> mStickyEvents = new ArrayList<>();
+    private HashMap<String, ArrayList<MethodInfo>> mPathMap      = new HashMap<>();
+    private HashMap<Class, ArrayList<MethodInfo>>  mClassCache   = new HashMap<>();
+    private ArrayList<StickyEvent>                 mStickyEvents = new ArrayList<>();
 
     public static GowildEvent getInstance() {
         return INSTANCE;
@@ -32,14 +38,25 @@ public enum GowildEvent {
      * <li>缓存订阅对象的Class信息</li>
      * <li>缓存订阅对象的对象信息</li>
      */
-    public void init(String className) {
+    public void init(Context context) throws PackageManager.NameNotFoundException, IOException {
+        Set<String> classSet = ClassUtils.getClassNameInPackage(context,
+                        Constrants.API_PACKAGE_ROOT_PACKAGE_NAME);
+        for (String className : classSet) {
+            if (className.startsWith(Constrants.API_PACKAGE_ROOT_PACKAGE_NAME + Constrants.DOT + Constrants.EVENT_PATH_CENTER)) {
+                // 要先初始化GowildEvent
+                GowildEvent.getInstance().init(className);
+            }
+        }
+    }
+
+    private void init(String className) {
 
         synchronized (INSTANCE) {
             HashMap<String, ArrayList<MethodInfo>> tmpCache = null;
             try {
-                Class<?> clazz = Class.forName(className);
-                Object instance = clazz.newInstance();
-                Method loadPathMethod = clazz.getMethod("loadEventPath");
+                Class<?> clazz          = Class.forName(className);
+                Object   instance       = clazz.newInstance();
+                Method   loadPathMethod = clazz.getMethod("loadEventPath");
                 tmpCache = (HashMap<String, ArrayList<MethodInfo>>) loadPathMethod.invoke(instance);
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
@@ -56,15 +73,15 @@ public enum GowildEvent {
             if (tmpCache != null) {
 
                 Iterator<String> iterator = tmpCache.keySet().iterator();
-                while (iterator.hasNext()){
+                while (iterator.hasNext()) {
 
-                    String key = iterator.next();
+                    String                key            = iterator.next();
                     ArrayList<MethodInfo> methodInfosOut = tmpCache.get(key);
                     ArrayList<MethodInfo> methodInfosIn  = mPathMap.get(key);
-                    if (methodInfosIn != null){
+                    if (methodInfosIn != null) {
                         methodInfosIn.addAll(methodInfosOut);
-                    }else {
-                        mPathMap.put(key,methodInfosOut);
+                    } else {
+                        mPathMap.put(key, methodInfosOut);
                     }
 
                     for (MethodInfo methodInfo : methodInfosOut) {
@@ -140,7 +157,7 @@ public enum GowildEvent {
             return null;
         }
         MethodInfo methodInfo = methodInfos.get(0);
-        Class[] clazzs = methodInfo.getParamsClass();
+        Class[]    clazzs     = methodInfo.getParamsClass();
         return clazzs.length == 0 ? null : clazzs[0];
     }
 
@@ -174,7 +191,7 @@ public enum GowildEvent {
     }
 
     private String toAscii(String raw) {
-        char[] chars = raw.toCharArray();
+        char[]       chars  = raw.toCharArray();
         StringBuffer buffer = new StringBuffer("g");
         for (char c : chars) {
             buffer.append((int) c + "_");
