@@ -11,7 +11,6 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/ereactivity" />
             <option value="$PROJECT_DIR$/libannotation" />
             <option value="$PROJECT_DIR$/libapi" />
             <option value="$PROJECT_DIR$/libcompiler" />
